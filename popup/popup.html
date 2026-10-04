@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CrawlVault</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="../dashboard/dashboard.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body class="popup">
+  <!-- Header: brand + ways to open the full view -->
+  <header class="p-head">
+    <span class="wordmark">CrawlVault<span>.</span><small class="byline">by The SEO Central</small></span>
+    <span class="p-head__actions">
+      <button class="icon-btn" id="open-side" title="Open in side panel" aria-label="Open in side panel">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="2"/><line x1="12.5" y1="3.5" x2="12.5" y2="16.5"/></svg>
+      </button>
+      <button class="icon-btn" id="open-tab" title="Open full dashboard in a new tab" aria-label="Open full dashboard in a new tab">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M11 3.5h5.5V9M16.5 3.5 9 11M14 12v3.5a1 1 0 0 1-1 1H4.5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1H8"/></svg>
+      </button>
+    </span>
+  </header>
+
+  <main class="p-main">
+    <!-- STEP 1 · choose a Search Console property -->
+    <section class="p-sec">
+      <p class="kicker">Step 1 · Choose a property</p>
+      <div id="list-status" class="p-note" role="status"></div>
+      <label class="visually-hidden" for="prop-select">Search Console property</label>
+      <select id="prop-select" class="select p-full"></select>
+      <p class="p-hint">Loaded from your Search Console account. Only root-level properties have Crawl stats.
+        <button class="link-btn" id="refresh-list">Refresh list</button></p>
+    </section>
+
+    <!-- STEP 2 · back up the selected property -->
+    <section class="p-sec" id="selected" hidden>
+      <p class="kicker">Step 2 · Back up</p>
+      <div class="p-card">
+        <div class="p-card__top">
+          <div>
+            <p class="p-prop" id="sel-label"></p>
+            <p class="meta" id="sel-meta"></p>
+          </div>
+          <span id="sel-tag"></span>
+        </div>
+        <svg class="spark" id="sel-spark" viewBox="0 0 300 48" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <div id="run-status" class="p-note" role="status"></div>
+        <button class="btn btn--primary p-full" id="backup">Back up crawl stats</button>
+        <button class="btn btn--outline p-full" id="view">View saved data</button>
+      </div>
+      <!-- Annotated walkthrough of what happens -->
+      <ol class="p-steps">
+        <li><b>Back up</b> reads the Crawl stats report straight from Search Console. No tab opens and no file is downloaded.</li>
+        <li>Each backup adds up to 90 days and merges with older backups, so the history keeps growing.</li>
+        <li>We remind you every <b id="interval-days">21</b> days, before Google deletes the old data.</li>
+        <li>On Search Console’s Crawl stats page you’ll also see a <b><span class="dot-red">●</span> Back up crawl stats</b> button next to Export.</li>
+      </ol>
+    </section>
+
+    <!-- Saved sites -->
+    <section class="p-sec">
+      <div class="p-sec__head">
+        <p class="kicker">Saved sites</p>
+        <button class="link-btn" id="backup-all" hidden></button>
+      </div>
+      <ul class="p-saved" id="saved"></ul>
+    </section>
+  </main>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

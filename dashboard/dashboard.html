@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>CrawlVault Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="wordmark" href="#">CrawlVault<span>.</span><small class="byline">by The SEO Central</small></a>
+      <div class="topbar__actions">
+        <label class="visually-hidden" for="property">Property</label>
+        <select id="property" class="select"></select>
+        <button class="btn btn--primary" id="backup-now">Back up now</button>
+        <button class="btn btn--outline" id="import-btn" title="Import a crawl stats CSV/zip exported from Search Console, or a CrawlVault backup">Import file</button>
+        <input type="file" id="import-file" accept=".csv,.zip,.tsv,.json" hidden multiple>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="flash" class="flash" role="status" hidden></div>
+
+    <!-- Empty state -->
+    <section id="empty" class="section" hidden>
+      <p class="kicker">Get started</p>
+      <h1>Keep your crawl stats beyond 90 days</h1>
+      <p class="lead">Search Console only keeps crawl stats for 90 days and has no API for them. CrawlVault reads the report directly from Search Console and saves every backup in this browser, so your history keeps growing.</p>
+      <ol class="steps">
+        <li><strong>Click the CrawlVault icon</strong> in Chrome’s toolbar. Your Search Console properties load automatically.</li>
+        <li><strong>Pick a property and click “Back up crawl stats”.</strong> No tab opens and no file is downloaded.</li>
+        <li><strong>That’s it.</strong> We remind you every few weeks, before Google deletes the old data.</li>
+      </ol>
+    </section>
+
+    <!-- Main dashboard -->
+    <div id="dash" hidden>
+      <section class="section section--tight">
+        <p class="kicker" id="prop-kicker"></p>
+        <h1 id="prop-title"></h1>
+        <p class="meta" id="prop-meta"></p>
+      </section>
+
+      <!-- Date range: presets, month picks, custom from/to -->
+      <section class="rangebar card" aria-label="Date range">
+        <div class="rangebar__row">
+          <div class="segmented" id="presets" role="group" aria-label="Quick ranges">
+            <button data-preset="30">Last 30 days</button><button data-preset="90">Last 90 days</button><button data-preset="365">Last 12 months</button><button data-preset="all">All time</button>
+          </div>
+          <div class="daterange">
+            <label>From <input type="date" id="from" class="input input--date"></label>
+            <label>To <input type="date" id="to" class="input input--date"></label>
+          </div>
+        </div>
+        <div class="months" id="months" role="group" aria-label="Pick a month"></div>
+        <p class="meta" id="range-label"></p>
+      </section>
+
+      <section class="section section--tight">
+        <div class="stats" id="stats"></div>
+      </section>
+
+      <section class="section section--tight">
+        <h2>Crawl activity</h2>
+        <div class="charts">
+          <figure class="card chart" id="chart-requests"><figcaption>Total crawl requests</figcaption></figure>
+          <figure class="card chart" id="chart-bytes"><figcaption>Total download size</figcaption></figure>
+          <figure class="card chart" id="chart-time"><figcaption>Average response time (ms)</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="section section--tight">
+        <div class="section__head">
+          <h2>Month by month</h2>
+          <p class="meta">Click a month to view it</p>
+        </div>
+        <div class="card table-wrap"><table class="table table--click" id="monthly"></table></div>
+      </section>
+
+      <section class="section section--tight">
+        <div class="section__head">
+          <h2>Breakdowns</h2>
+          <p class="meta" id="bd-meta"></p>
+        </div>
+        <div class="grid-2" id="breakdowns"></div>
+      </section>
+
+      <section class="section section--tight">
+        <h2>Backup history</h2>
+        <div class="card table-wrap"><table class="table" id="history"></table></div>
+      </section>
+    </div>
+
+    <section class="section section--tight" id="settings">
+      <h2>Settings</h2>
+      <div class="grid-2">
+        <div class="card pad">
+          <h3>Reminders</h3>
+          <label class="field">Back up every
+            <input id="interval" class="input input--sm" type="number" min="1" max="85"> days
+          </label>
+          <label class="check"><input type="checkbox" id="auto-backup"> Back up automatically when due (no reminder, just a “saved” notification)</label>
+          <p class="meta">Google keeps 90 days, so anything under ~80 days loses nothing. 21 days is a safe default.</p>
+        </div>
+        <div class="card pad">
+          <h3>Properties &amp; data</h3>
+          <ul class="prop-list" id="prop-list"></ul>
+          <div class="btn-row">
+            <button class="btn btn--outline" id="dl-csv">Download CSV (selected range)</button>
+            <button class="btn btn--outline" id="dl-backup">Backup (JSON)</button>
+            <button class="btn btn--outline" id="restore-btn">Restore backup</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer container"><span>All data is stored locally in this browser. Free and open source (MIT) by <a href="https://www.theseocentral.com/" target="_blank" rel="noopener">The SEO Central</a>.</span></footer>
+  <div class="tooltip" id="tooltip" hidden></div>
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>

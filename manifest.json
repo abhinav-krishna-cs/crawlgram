@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "CrawlVault – GSC crawl stats history",
+  "short_name": "CrawlVault",
+  "version": "1.0.0",
+  "description": "Free & open source. Keep Google Search Console crawl stats beyond 90 days. Stored locally in your browser. By The SEO Central.",
+  "minimum_chrome_version": "116",
+  "permissions": [
+    "alarms",
+    "notifications",
+    "storage",
+    "unlimitedStorage",
+    "tabs",
+    "sidePanel"
+  ],
+  "host_permissions": [
+    "https://search.google.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://search.google.com/*search-console*"
+      ],
+      "js": [
+        "content/gsc-bridge.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "CrawlVault – crawl stats backup",
+    "default_popup": "popup/popup.html",
+    "default_icon": "icons/icon128.png"
+  },
+  "icons": {
+    "128": "icons/icon128.png"
+  },
+  "side_panel": {
+    "default_path": "dashboard/dashboard.html?view=side"
+  },
+  "author": "The SEO Central",
+  "homepage_url": "https://www.theseocentral.com/"
+}

@@ -1,0 +1,54 @@
+/* Popup layout. Brand tokens and components come from dashboard.css. */
+body.popup { width: 380px; min-height: 420px; font-size: var(--text-sm); line-height: 1.5; }
+
+.p-head { display: flex; align-items: center; justify-content: space-between; padding: var(--space-4) var(--space-4) var(--space-3); border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--bg); z-index: 1; }
+.p-head__actions { display: flex; gap: var(--space-1); }
+.icon-btn { width: 32px; height: 32px; display: grid; place-items: center; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg); cursor: pointer; transition: border-color .15s; }
+.icon-btn svg { width: 16px; height: 16px; fill: none; stroke: var(--text); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.icon-btn:hover { border-color: var(--accent); }
+.icon-btn:hover svg { stroke: var(--accent); }
+.icon-btn:focus-visible, .link-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.p-main { padding: 0 var(--space-4) var(--space-4); }
+.p-sec { padding-top: var(--space-4); }
+.p-sec + .p-sec { margin-top: var(--space-4); border-top: 1px solid var(--hairline); }
+.p-sec .kicker { margin-bottom: var(--space-2); }
+.p-full { width: 100%; max-width: none; }
+.popup .select { font-size: var(--text-sm); }
+.btn.p-full + .btn.p-full { margin-top: var(--space-2); }
+
+.p-hint { margin: var(--space-2) 0 0; color: var(--text-muted); font-size: var(--text-xs); }
+.link-btn { background: none; border: 0; padding: 0; color: var(--accent); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; font-size: inherit; }
+.p-note { font-size: var(--text-xs); margin-bottom: var(--space-2); }
+.p-note:empty { display: none; }
+.p-note--box { padding: var(--space-2) var(--space-3); border-radius: var(--radius); background: var(--grey-lighter); border-left: 3px solid var(--black); }
+.p-note--err { border-left-color: var(--loss); }
+.inline-form .input { flex: 1 1 10rem; }
+
+.p-card { border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-4); box-shadow: var(--shadow-sm); }
+.p-card__top { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-2); }
+.p-prop { margin: 0; font-family: var(--font-heading); font-weight: 700; font-size: var(--text-lg); line-height: 1.2; letter-spacing: -0.01em; word-break: break-all; }
+.spark { display: block; width: 100%; height: 48px; margin: var(--space-3) 0; }
+.spark polyline { fill: none; stroke: var(--black); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.spark line { stroke: var(--hairline); }
+.spark text { fill: var(--text-muted); font: 11px var(--font-body); }
+
+.p-steps { margin: var(--space-4) 0 0; padding-left: 1.2rem; color: var(--text-muted); font-size: var(--text-xs); }
+.p-steps li { margin-bottom: var(--space-1); }
+.p-steps li::marker { color: var(--accent); font-family: var(--font-heading); font-weight: 600; }
+.p-steps b { color: var(--text); font-weight: 600; }
+.dot-red { color: var(--accent); }
+
+.p-saved { list-style: none; margin: 0; padding: 0; }
+.p-saved li { border-bottom: 1px solid var(--hairline); }
+.p-saved li:last-child { border-bottom: 0; }
+.p-saved__row { display: flex; justify-content: space-between; align-items: center; gap: var(--space-2); width: 100%; padding: var(--space-3) 0; background: none; border: 0; cursor: pointer; text-align: left; }
+.p-saved__row:hover .p-saved__name { color: var(--accent); }
+.p-saved__name { font-family: var(--font-heading); font-weight: 600; font-size: var(--text-sm); word-break: break-all; transition: color .15s; }
+.p-saved__meta { display: block; color: var(--text-muted); font-size: var(--text-xs); }
+.p-saved__open { display: flex; gap: var(--space-2); padding-bottom: var(--space-3); }
+.p-saved__open .btn { flex: 1; }
+.p-empty { color: var(--text-muted); font-size: var(--text-xs); padding: var(--space-2) 0; }
+.p-sec__head { display: flex; justify-content: space-between; align-items: baseline; }
+.p-sec__head .link-btn { font-size: var(--text-xs); }
+.p-card .p-note { margin-top: var(--space-2); }

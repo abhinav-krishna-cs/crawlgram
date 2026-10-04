@@ -1,0 +1,37 @@
+# Pushing a tag like v1.0.1 builds the extension zip and publishes a GitHub release.
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check tag matches manifest version
+        run: |
+          MANIFEST_VERSION=$(jq -r .version manifest.json)
+          if [ "v$MANIFEST_VERSION" != "$GITHUB_REF_NAME" ]; then
+            echo "Tag $GITHUB_REF_NAME does not match manifest.json version $MANIFEST_VERSION"
+            exit 1
+          fi
+
+      - name: Build zip
+        run: |
+          mkdir -p dist/crawlvault
+          cp -r manifest.json background.js content dashboard icons lib popup LICENSE dist/crawlvault/
+          cd dist && zip -r "crawlvault-$GITHUB_REF_NAME.zip" crawlvault
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/crawlvault-${{ github.ref_name }}.zip
+          generate_release_notes: true
+          body: |
+            **Install:** download `crawlvault-${{ github.ref_name }}.zip` below, unzip it, open `chrome://extensions`, turn on Developer mode, click **Load unpacked** and select the `crawlvault` folder.
