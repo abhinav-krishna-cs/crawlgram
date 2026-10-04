@@ -98,7 +98,7 @@ Bug reports and pull requests are welcome!
 ## Releasing (maintainers)
 
 1. Bump `version` in `manifest.json`.
-2. Create and push a tag: `git tag v1.0.1 && git push origin v1.0.1`
+2. On GitHub, open **Actions → Release → Run workflow** (or push a tag such as `v1.0.1`).
 3. GitHub Actions builds `crawlvault-v1.0.1.zip` and publishes the release automatically.
 
 ## License

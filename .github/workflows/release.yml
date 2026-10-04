@@ -1,7 +1,10 @@
-# Pushing a tag like v1.0.1 builds the extension zip and publishes a GitHub release.
+# Builds the extension zip and publishes a GitHub release.
+# Run it from the Actions tab ("Run workflow"), or push a tag like v1.0.1.
+# The release version always comes from manifest.json.
 name: Release
 
 on:
+  workflow_dispatch:
   push:
     tags: ['v*']
 
@@ -14,24 +17,29 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check tag matches manifest version
+      - name: Read version from manifest
+        id: version
         run: |
-          MANIFEST_VERSION=$(jq -r .version manifest.json)
-          if [ "v$MANIFEST_VERSION" != "$GITHUB_REF_NAME" ]; then
-            echo "Tag $GITHUB_REF_NAME does not match manifest.json version $MANIFEST_VERSION"
+          TAG="v$(jq -r .version manifest.json)"
+          if [ "$GITHUB_REF_TYPE" = "tag" ] && [ "$GITHUB_REF_NAME" != "$TAG" ]; then
+            echo "Tag $GITHUB_REF_NAME does not match manifest.json version $TAG"
             exit 1
           fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
 
       - name: Build zip
         run: |
           mkdir -p dist/crawlvault
           cp -r manifest.json background.js content dashboard icons lib popup LICENSE dist/crawlvault/
-          cd dist && zip -r "crawlvault-$GITHUB_REF_NAME.zip" crawlvault
+          cd dist && zip -r "crawlvault-${{ steps.version.outputs.tag }}.zip" crawlvault
 
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/crawlvault-${{ github.ref_name }}.zip
+          tag_name: ${{ steps.version.outputs.tag }}
+          target_commitish: ${{ github.sha }}
+          name: CrawlVault ${{ steps.version.outputs.tag }}
+          files: dist/crawlvault-${{ steps.version.outputs.tag }}.zip
           generate_release_notes: true
           body: |
-            **Install:** download `crawlvault-${{ github.ref_name }}.zip` below, unzip it, open `chrome://extensions`, turn on Developer mode, click **Load unpacked** and select the `crawlvault` folder.
+            **Install:** download `crawlvault-${{ steps.version.outputs.tag }}.zip` below, unzip it, open `chrome://extensions`, turn on Developer mode, click **Load unpacked** and select the `crawlvault` folder.
