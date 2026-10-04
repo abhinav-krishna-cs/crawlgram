@@ -1,11 +1,14 @@
 # Builds the extension zip and publishes a GitHub release.
-# Run it from the Actions tab ("Run workflow"), or push a tag like v1.0.1.
-# The release version always comes from manifest.json.
+# Runs automatically when the version in manifest.json changes on main
+# (skipped if that version is already released), from the Actions tab
+# ("Run workflow"), or when a tag like v1.0.1 is pushed.
 name: Release
 
 on:
   workflow_dispatch:
   push:
+    branches: [main]
+    paths: [manifest.json, .github/workflows/release.yml]
     tags: ['v*']
 
 permissions:
@@ -26,14 +29,22 @@ jobs:
             exit 1
           fi
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "$TAG is already released, nothing to do."
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
 
       - name: Build zip
+        if: steps.version.outputs.exists != 'true'
         run: |
           mkdir -p dist/crawlvault
           cp -r manifest.json background.js content dashboard icons lib popup LICENSE dist/crawlvault/
           cd dist && zip -r "crawlvault-${{ steps.version.outputs.tag }}.zip" crawlvault
 
       - name: Publish release
+        if: steps.version.outputs.exists != 'true'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.version.outputs.tag }}
