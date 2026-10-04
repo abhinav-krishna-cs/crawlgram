@@ -11,10 +11,10 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/abhinav-krishna-cs/crawlvault/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/abhinav-krishna-cs/crawlvault?label=release&color=E31E24"></a>
-  <a href="https://github.com/abhinav-krishna-cs/crawlvault/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/abhinav-krishna-cs/crawlvault/total?color=0A0A0A"></a>
-  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/github/license/abhinav-krishna-cs/crawlvault?color=12A150"></a>
-  <a href="https://github.com/abhinav-krishna-cs/crawlvault/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/abhinav-krishna-cs/crawlvault?style=flat&color=E31E24"></a>
+  <a href="https://github.com/abhinav-krishna-cs/crawlgram/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/abhinav-krishna-cs/crawlgram?label=release&color=E31E24"></a>
+  <a href="https://github.com/abhinav-krishna-cs/crawlgram/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/abhinav-krishna-cs/crawlgram/total?color=0A0A0A"></a>
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/github/license/abhinav-krishna-cs/crawlgram?color=12A150"></a>
+  <a href="https://github.com/abhinav-krishna-cs/crawlgram/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/abhinav-krishna-cs/crawlgram?style=flat&color=E31E24"></a>
   <img alt="Chrome 116+" src="https://img.shields.io/badge/Chrome-116%2B-4285F4?logo=googlechrome&logoColor=white">
   <img alt="Manifest V3" src="https://img.shields.io/badge/Manifest-V3-0A0A0A">
 </p>
@@ -42,7 +42,7 @@ CrawlVault reads the report straight from Search Console every few weeks and sto
 
 ### From GitHub (2 minutes)
 
-1. Download **`crawlvault-vX.Y.Z.zip`** from the [latest release](https://github.com/abhinav-krishna-cs/crawlvault/releases/latest).
+1. Download **`crawlvault-vX.Y.Z.zip`** from the [latest release](https://github.com/abhinav-krishna-cs/crawlgram/releases/latest).
 2. Unzip it.
 3. Open `chrome://extensions` in Chrome.
 4. Turn on **Developer mode** (top right).
@@ -92,7 +92,7 @@ No build step and no dependencies. Edit the files and reload the extension.
 
 Bug reports and pull requests are welcome!
 
-- **Found a bug?** [Open an issue](https://github.com/abhinav-krishna-cs/crawlvault/issues). If a backup fails, include the error message (Google sometimes changes Search Console's page data).
+- **Found a bug?** [Open an issue](https://github.com/abhinav-krishna-cs/crawlgram/issues). If a backup fails, include the error message (Google sometimes changes Search Console's page data).
 - **Want to help?** Fork the repo, make your change, load it unpacked to test, and open a pull request.
 
 ## Releasing (maintainers)

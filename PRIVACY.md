@@ -23,4 +23,4 @@ The extension pages load the Inter and Poppins fonts from Google Fonts. Google m
 
 ## Contact
 
-Questions? Open an issue at https://github.com/abhinav-krishna-cs/crawlvault/issues or contact [The SEO Central](https://www.theseocentral.com/).
+Questions? Open an issue at https://github.com/abhinav-krishna-cs/crawlgram/issues or contact [The SEO Central](https://www.theseocentral.com/).
