@@ -6,7 +6,8 @@
 
 <p align="center">
   <b>Keep your Google Search Console crawl stats beyond 90 days.</b><br>
-  Free &amp; open-source Chrome extension by <a href="https://www.theseocentral.com/">The SEO Central</a>.
+  Free &amp; open-source Chrome extension by <a href="https://www.theseocentral.com/">The SEO Central</a>.<br>
+  🌐 <a href="https://www.crawlgram.com/">crawlgram.com</a>
 </p>
 
 <p align="center">
